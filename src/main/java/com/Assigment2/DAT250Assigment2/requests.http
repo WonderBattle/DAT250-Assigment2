@@ -1,0 +1,43 @@
+### Test 1: Get all users (should be empty at first)
+GET http://localhost:8080/users
+
+### Test 2: Create User 1
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "user1",
+  "email": "user1@example.com"
+}
+
+### Test 3: Create User 2
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "username": "user2",
+  "email": "user2@example.com"
+}
+
+### Test 4: Get all users again (should show 2 users)
+GET http://localhost:8080/users
+
+
+### Create a Poll (User 1 creates a poll)
+POST http://localhost:8080/polls
+Content-Type: application/json
+
+{
+  "question": "What's your favorite color?",
+  "publishedAt": "2024-01-15T10:00:00Z",
+  "validUntil": "2024-01-22T10:00:00Z",
+  "creator": {
+    "id": "PASTE_USER1_ID_HERE"
+  }
+}
+
+### List all polls
+GET http://localhost:8080/polls
+
+### Delete a poll
+DELETE http://localhost:8080/polls/PASTE_POLL_ID_HERE

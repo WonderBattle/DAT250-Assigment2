@@ -5,6 +5,9 @@ public class Poll {
     private String question;
     private String publishedAt;  // Changed from Instant to String
     private String validUntil;   // Changed from Instant to String
+    private User creator;                          // Poll has a creator
+    private List<VoteOption> voteOptions = new ArrayList<>(); // Poll has options
+    private List<Vote> votes = new ArrayList<>();            // Poll has votes
 
     public Poll() {}
 
@@ -20,4 +23,14 @@ public class Poll {
 
     public String getValidUntil() { return validUntil; }
     public void setValidUntil(String validUntil) { this.validUntil = validUntil; }
+
+    // Add relationship getters/setters
+    public User getCreator() { return creator; }
+    public void setCreator(User creator) { this.creator = creator; }
+
+    public List<VoteOption> getVoteOptions() { return voteOptions; }
+    public void setVoteOptions(List<VoteOption> voteOptions) { this.voteOptions = voteOptions; }
+
+    public List<Vote> getVotes() { return votes; }
+    public void setVotes(List<Vote> votes) { this.votes = votes; }
 }

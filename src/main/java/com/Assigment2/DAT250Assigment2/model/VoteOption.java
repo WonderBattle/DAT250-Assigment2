@@ -4,6 +4,7 @@ public class VoteOption {
     private String id;
     private String caption;
     private int presentationOrder;
+    private Poll poll; // VoteOption belongs to a Poll
 
     public VoteOption() {}
 
@@ -16,4 +17,7 @@ public class VoteOption {
 
     public int getPresentationOrder() { return presentationOrder; }
     public void setPresentationOrder(int presentationOrder) { this.presentationOrder = presentationOrder; }
+
+    public Poll getPoll() { return poll; }
+    public void setPoll(Poll poll) { this.poll = poll; }
 }
