@@ -39,7 +39,7 @@ Content-Type: application/json
   "publishedAt": "2024-01-15T10:00:00Z",
   "validUntil": "2024-01-22T10:00:00Z",
   "creator": {
-    "id": "PASTE_ALICE_USER_ID_HERE",
+    "id": "5e8b591d-3857-4c27-b5ba-d4486efaff3a",
     "username": "alice",
     "email": "alice@example.com"
   }
@@ -57,7 +57,7 @@ Content-Type: application/json
   "caption": "Red",
   "presentationOrder": 1,
   "poll": {
-    "id": "PASTE_POLL_ID_HERE"
+    "id": "ed3d5d20-1426-4b56-bdab-b6a25ac27091"
   }
 }
 
@@ -69,7 +69,7 @@ Content-Type: application/json
   "caption": "Blue",
   "presentationOrder": 2,
   "poll": {
-    "id": "PASTE_POLL_ID_HERE"
+    "id": "ed3d5d20-1426-4b56-bdab-b6a25ac27091"
   }
 }
 
@@ -80,12 +80,12 @@ Content-Type: application/json
 
 {
   "user": {
-    "id": "PASTE_BOB_USER_ID_HERE",
+    "id": "74b352d5-8833-498c-9a5a-719a9159ce9b",
     "username": "bob",
     "email": "bob@example.com"
   },
   "voteOption": {
-    "id": "PASTE_RED_OPTION_ID_HERE",
+    "id": "aaa477f7-cf11-4f21-8cf9-0d25a50da431",
     "caption": "Red"
   }
 }
@@ -100,12 +100,12 @@ Content-Type: application/json
 
 {
   "user": {
-    "id": "PASTE_BOB_USER_ID_HERE",
+    "id": "74b352d5-8833-498c-9a5a-719a9159ce9b",
     "username": "bob",
     "email": "bob@example.com"
   },
   "voteOption": {
-    "id": "PASTE_BLUE_OPTION_ID_HERE",
+    "id": "c1abbea7-3a17-4065-827a-0cdfcabb8f41",
     "caption": "Blue"
   }
 }
@@ -114,7 +114,7 @@ Content-Type: application/json
 GET http://localhost:8080/votes
 
 ### Step 13: Delete the poll
-DELETE http://localhost:8080/polls/PASTE_POLL_ID_HERE
+DELETE http://localhost:8080/polls/ed3d5d20-1426-4b56-bdab-b6a25ac27091
 
 ### Step 14: List votes again (-> should be empty since poll was deleted)
 GET http://localhost:8080/votes

@@ -20,7 +20,6 @@ public class VoteOptionController {
 
     @GetMapping
     public List<VoteOption> getAllVoteOptions() {
-        // We'll implement this later if needed
-        return List.of();
+        return pollManager.getAllVoteOptions();
     }
 }

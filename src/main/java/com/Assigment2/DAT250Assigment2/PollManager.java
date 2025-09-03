@@ -63,11 +63,29 @@ public class PollManager {
 
     public void deletePoll(String id) {
         Poll poll = polls.get(id);
-        if (poll != null && poll.getCreator() != null) {
-            poll.getCreator().getCreatedPolls().remove(poll);
+        if (poll != null) {
+            // Remove poll from creator's created polls
+            if (poll.getCreator() != null) {
+                poll.getCreator().getCreatedPolls().remove(poll);
+            }
+
+            // Delete associated votes
+            deleteVotesByPollId(id);
+
+            // Delete associated vote options
+            deleteVoteOptionsByPollId(id);
+
+            // Finally remove the poll itself
+            polls.remove(id);
         }
-        polls.remove(id);
-        deleteVotesByPollId(id); // Delete associated votes
+    }
+
+    public void deleteVoteOptionsByPollId(String pollId) {
+        // Remove vote options associated with a poll when it's deleted
+        voteOptions.values().removeIf(voteOption ->
+                voteOption.getPoll() != null &&
+                        voteOption.getPoll().getId().equals(pollId)
+        );
     }
 
     // VoteOption methods (for poll options)
@@ -88,18 +106,26 @@ public class PollManager {
         String id = UUID.randomUUID().toString();
         vote.setId(id);
         vote.setPublishedAt(String.valueOf(System.currentTimeMillis()));
+
+        // PROPERLY SET USER RELATIONSHIP
+        if (vote.getUser() != null && vote.getUser().getId() != null) {
+            User user = users.get(vote.getUser().getId());
+            if (user != null) {
+                vote.setUser(user); // Replace with full user object
+                user.getVotes().add(vote); // Add to user's votes
+            }
+        }
+
+        // PROPERLY SET VOTEOPTION RELATIONSHIP
+        if (vote.getVoteOption() != null && vote.getVoteOption().getId() != null) {
+            VoteOption voteOption = voteOptions.get(vote.getVoteOption().getId());
+            if (voteOption != null) {
+                vote.setVoteOption(voteOption); // Replace with full voteOption object
+                // The vote is now properly connected to the voteOption and its poll
+            }
+        }
+
         votes.put(id, vote);
-
-        // Add vote to user's vote history
-        if (vote.getUser() != null) {
-            vote.getUser().getVotes().add(vote);
-        }
-
-        // Add vote to poll's votes
-        if (vote.getVoteOption() != null && vote.getVoteOption().getPoll() != null) {
-            vote.getVoteOption().getPoll().getVotes().add(vote);
-        }
-
         return vote;
     }
 
@@ -116,5 +142,8 @@ public class PollManager {
         );
     }
 
+    public List<VoteOption> getAllVoteOptions() {
+        return new ArrayList<>(voteOptions.values());
+    }
 
 }
