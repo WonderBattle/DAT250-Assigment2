@@ -1,5 +1,9 @@
 package com.Assigment2.DAT250Assigment2.model;
 
+import java.util.List;
+import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class User {
     private String id;
     private String username;
@@ -20,9 +24,11 @@ public class User {
     public void setEmail(String email) { this.email = email; }
 
     // Add relationship getters/setters
+    @JsonIgnore
     public List<Poll> getCreatedPolls() { return createdPolls; }
     public void setCreatedPolls(List<Poll> createdPolls) { this.createdPolls = createdPolls; }
 
+    @JsonIgnore
     public List<Vote> getVotes() { return votes; }
     public void setVotes(List<Vote> votes) { this.votes = votes; }
 }

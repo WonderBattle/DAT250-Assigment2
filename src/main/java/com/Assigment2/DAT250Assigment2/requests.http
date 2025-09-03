@@ -1,29 +1,36 @@
-### Test 1: Get all users (should be empty at first)
+### ==============================================
+### DAT250 Assignment 2 - Complete Test Scenario
+### ==============================================
+
+### Step 1: List all users (empty at first)
 GET http://localhost:8080/users
 
-### Test 2: Create User 1
+### Step 2: Create a new user (User 1)
 POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "username": "user1",
-  "email": "user1@example.com"
+  "username": "alice",
+  "email": "alice@example.com"
 }
 
-### Test 3: Create User 2
+### Step 3: List all users (-> shows the newly created user)
+GET http://localhost:8080/users
+
+### Step 4: Create another user (User 2)
 POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "username": "user2",
-  "email": "user2@example.com"
+  "username": "bob",
+  "email": "bob@example.com"
 }
 
-### Test 4: Get all users again (should show 2 users)
+### Step 5: List all users again (-> shows two users)
 GET http://localhost:8080/users
 
-
-### Create a Poll (User 1 creates a poll)
+### Step 6: User 1 creates a new poll
+### First, copy Alice's ID from Step 3 or 5 response
 POST http://localhost:8080/polls
 Content-Type: application/json
 
@@ -32,12 +39,88 @@ Content-Type: application/json
   "publishedAt": "2024-01-15T10:00:00Z",
   "validUntil": "2024-01-22T10:00:00Z",
   "creator": {
-    "id": "PASTE_USER1_ID_HERE"
+    "id": "PASTE_ALICE_USER_ID_HERE",
+    "username": "alice",
+    "email": "alice@example.com"
   }
 }
 
-### List all polls
+### Step 7: List polls (-> shows the new poll)
 GET http://localhost:8080/polls
 
-### Delete a poll
+### Step 8: Create vote options for the poll
+### First, copy the poll ID from Step 6 or 7 response
+POST http://localhost:8080/voteoptions
+Content-Type: application/json
+
+{
+  "caption": "Red",
+  "presentationOrder": 1,
+  "poll": {
+    "id": "PASTE_POLL_ID_HERE"
+  }
+}
+
+###
+POST http://localhost:8080/voteoptions
+Content-Type: application/json
+
+{
+  "caption": "Blue",
+  "presentationOrder": 2,
+  "poll": {
+    "id": "PASTE_POLL_ID_HERE"
+  }
+}
+
+### Step 9: User 2 votes on the poll (votes for Red)
+### Copy Bob's ID and the Red vote option ID
+POST http://localhost:8080/votes
+Content-Type: application/json
+
+{
+  "user": {
+    "id": "PASTE_BOB_USER_ID_HERE",
+    "username": "bob",
+    "email": "bob@example.com"
+  },
+  "voteOption": {
+    "id": "PASTE_RED_OPTION_ID_HERE",
+    "caption": "Red"
+  }
+}
+
+### Step 10: List votes (-> shows Bob's vote for Red)
+GET http://localhost:8080/votes
+
+### Step 11: User 2 changes his vote (changes to Blue)
+### Copy the Blue vote option ID
+POST http://localhost:8080/votes
+Content-Type: application/json
+
+{
+  "user": {
+    "id": "PASTE_BOB_USER_ID_HERE",
+    "username": "bob",
+    "email": "bob@example.com"
+  },
+  "voteOption": {
+    "id": "PASTE_BLUE_OPTION_ID_HERE",
+    "caption": "Blue"
+  }
+}
+
+### Step 12: List votes again (-> shows the most recent vote for User 2 - Blue)
+GET http://localhost:8080/votes
+
+### Step 13: Delete the poll
 DELETE http://localhost:8080/polls/PASTE_POLL_ID_HERE
+
+### Step 14: List votes again (-> should be empty since poll was deleted)
+GET http://localhost:8080/votes
+
+### Step 15: Final check - List polls (should be empty)
+GET http://localhost:8080/polls
+
+### Step 16: Final check - List users (should still have both users)
+GET http://localhost:8080/users

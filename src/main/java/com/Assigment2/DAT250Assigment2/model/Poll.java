@@ -1,5 +1,9 @@
 package com.Assigment2.DAT250Assigment2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
+import java.util.ArrayList;
+
 public class Poll {
     private String id;
     private String question;
@@ -31,6 +35,7 @@ public class Poll {
     public List<VoteOption> getVoteOptions() { return voteOptions; }
     public void setVoteOptions(List<VoteOption> voteOptions) { this.voteOptions = voteOptions; }
 
+    @JsonIgnore
     public List<Vote> getVotes() { return votes; }
     public void setVotes(List<Vote> votes) { this.votes = votes; }
 }
