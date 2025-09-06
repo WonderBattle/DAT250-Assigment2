@@ -22,7 +22,7 @@ public class PollAppIntegrationTest {
 
     @Test
     public void testCompleteAssignmentScenario() throws Exception {
-        // This test will follow the exact same scenario as your manual test
+        // This test will follow the exact same scenario as the manual test
         System.out.println("=== Starting Complete Assignment Scenario Test ===");
 
         // Step 1: List all users (empty at first)

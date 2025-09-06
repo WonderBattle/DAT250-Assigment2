@@ -6,15 +6,9 @@ Successfully implemented a REST API for a Poll application using Spring Boot wit
 
 ## Technical Problems Encountered and Solutions
 
-### 1. **Spring Web Dependencies Missing**
-**Problem**: Initial compilation errors with `@RestController`, `@GetMapping`, `@PostMapping` annotations not being recognized.
 
-**Solution**: Added the missing dependency to `build.gradle.kts`:
-```kotlin
-implementation("org.springframework.boot:spring-boot-starter-web")
-```
 
-### 2. **JSON Circular Reference Issues**
+### 1. **JSON Circular Reference Issues**
 **Problem**: Infinite JSON looping when serializing objects with bidirectional relationships, causing stack overflow errors.
 
 **Solution**: Added `@JsonIgnore` annotations to break circular references:
@@ -23,7 +17,7 @@ implementation("org.springframework.boot:spring-boot-starter-web")
 public List<Poll> getCreatedPolls() { return createdPolls; }
 ```
 
-### 3. **Poll Deletion Not Cascading**
+### 2. **Poll Deletion Not Cascading**
 **Problem**: When deleting polls, associated votes and vote options remained in memory.
 
 **Solution**: Implemented proper cascade deletion in `PollManager`:
@@ -32,17 +26,17 @@ deleteVotesByPollId(String pollId);
 deleteVoteOptionsByPollId(String pollId);
 ```
 
-### 4. **Bidirectional Relationship Setup**
+### 3. **Bidirectional Relationship Setup**
 **Problem**: Vote options and votes not properly linked to their parent polls, causing deletion logic to fail.
 
 **Solution**: Enhanced `createVoteOption` and `createVote` methods to properly establish bidirectional relationships.
 
-### 5. **Test Automation Challenges**
+### 4. **Test Automation Challenges**
 **Problem**: Manual testing required copying IDs between requests, which was error-prone.
 
 **Solution**: Implemented automated integration test using `TestRestTemplate` that automatically extracts and reuses IDs.
 
-### 6. **GitHub Actions CI/CD Setup**
+### 5. **GitHub Actions CI/CD Setup**
 **Problem**: Initial CI failures due to missing Gradle wrapper files and test report path issues.
 
 **Solution**: Used GitHub's Gradle action and simplified CI configuration:
@@ -51,7 +45,7 @@ uses: gradle/actions/setup-gradle@v3
 run: gradle test --stacktrace
 ```
 
-### 7. **API Documentation Setup**
+### 6. **API Documentation Setup**
 **Problem**: Basic Swagger documentation lacked organization and descriptions.
 
 **Solution**: Added Springdoc OpenAPI with proper annotations:
