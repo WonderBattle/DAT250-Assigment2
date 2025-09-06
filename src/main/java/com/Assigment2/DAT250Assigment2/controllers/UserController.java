@@ -17,7 +17,6 @@ public class UserController {
     private PollManager pollManager;
 
     @Operation(summary = "Get all users", description = "Returns a list of all registered users") // Step 6: API Documentation
-
     @GetMapping
     public List<User> getAllUsers() {
         return pollManager.getAllUsers();
