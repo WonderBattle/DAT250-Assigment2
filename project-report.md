@@ -62,23 +62,22 @@ run: gradle test --stacktrace
 
 ## Test Scenario
 My test scenario runs a total of 16 steps:
-* ### Step 1: List all users (empty at first)
-* ### Step 2: Create a new user (User 1)
-* ### Step 3: List all users (-> shows the newly created user)
-* ### Step 4: Create another user (User 2)
-* ### Step 5: List all users again (-> shows two users)
-* ### Step 6: User 1 creates a new poll
-* ### Step 7: List polls (-> shows the new poll)
-* ### Step 8: Create vote options for the poll
-* ### Step 9: User 2 votes on the poll (votes for Red)
-* ### Step 10: List votes (-> shows Bob's vote for Red)
-* ### Step 11: User 2 changes his vote (changes to Blue)
-* ### Copy the Blue vote option ID
-* ### Step 12: List votes again (-> shows the most recent vote for User 2 - Blue)
-* ### Step 13: Delete the poll
-* ### Step 14: List votes again (-> should be empty since poll was deleted)
-* ### Step 15: Final check - List polls (should be empty)
-* ### Step 16: Final check - List users (should still have both users)
+*  Step 1: List all users (empty at first)
+*  Step 2: Create a new user (User 1)
+*  Step 3: List all users (-> shows the newly created user)
+*  Step 4: Create another user (User 2)
+*  Step 5: List all users again (-> shows two users)
+*  Step 6: User 1 creates a new poll
+*  Step 7: List polls (-> shows the new poll)
+*  Step 8: Create vote options for the poll
+*  Step 9: User 2 votes on the poll (votes for Red)
+*  Step 10: List votes (-> shows Bob's vote for Red)
+*  Step 11: User 2 changes his vote (changes to Blue)
+*  Step 12: List votes again (-> shows the most recent vote for User 2 - Blue)
+*  Step 13: Delete the poll
+*  Step 14: List votes again (-> should be empty since poll was deleted)
+*  Step 15: Final check - List polls (should be empty)
+*  Step 16: Final check - List users (should still have both users)
 
 If you are testing this manually, you have to replace the id's in each instance. This is because each time you create a User, a Poll, a VoteOption or a Vote, new id's are being created for that instance.
 If you are testing this automatically, you don't have to be careful about this because this is done automatically too.
